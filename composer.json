@@ -1,0 +1,20 @@
+{
+    "name": "erikfig/mfw",
+    "authors": [
+        {
+            "name": "Erik Figueiredo",
+            "email": "erik.figueiredo@gmail.com"
+        }
+    ],
+    "require": {
+        "illuminate/support": "^5.5"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "ErikFig\\": "src"
+        }
+    }
+}
