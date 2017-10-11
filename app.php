@@ -9,4 +9,6 @@ $app->get('/hello/{name}', function ($params) {
     return "<h1>{$params[1]}</h1>";
 });
 
+$app->get('/home/{name}', 'ErikFig\Controllers\HomeController@index');
+
 $app->run();

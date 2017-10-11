@@ -39,9 +39,28 @@ class App
         $route = $this->router->run();
         $resolver = new Resolver;
 
-        $data = $resolver->method($route['callback'], ['params'=>$route['params']]);
+        if (is_string($route['callback'])) {
+            $data = $this->resolveController($route);
+        } else {
+            $data = $resolver->method($route['callback'], ['params'=>$route['params']]);
+        }
 
         $this->renderer->setData($data);
         $this->renderer->run();
+    }
+
+    protected function resolveController(array $route)
+    {
+        $controllerAction = explode('@', $route['callback']);
+        if (count($controllerAction) !== 2) {
+            throw new \Exception('Invalid controller and action');
+        }
+
+        $resolver = new Resolver;
+
+        $controller = $resolver->class($controllerAction[0], ['params' => $route['params']]);
+        $action = $controllerAction[1];
+
+        return $controller->$action();
     }
 }
